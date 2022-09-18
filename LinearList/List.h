@@ -1,15 +1,31 @@
+/**
+ * @file List.h
+ * @author weiyewang (weiyewang1205@qq.com)
+ * @brief Definitions of linked list
+ * @version 0.1
+ * @date 2022-09-18
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #include<iostream>
 
 namespace mySTL{
+    template<typename datatype> struct ListNode{
+        ListNode* prior;
+        ListNode* next;
+        datatype data;
+    };
+    /**
+     * @brief A doubly linked list class
+     * @details head is a ListNode,rather than ListNode*
+     * @tparam datatype 
+     */
     template<typename datatype> class List{
         private:
-        struct ListNode{
-            ListNode* prior;
-            ListNode* next;
-            datatype data;
-        }head;
-
+            ListNode<datatype> head;
         public:
+        using ListNode=ListNode<datatype>;
         List(){
             head.prior=&head;
             head.next=&head;
@@ -42,10 +58,10 @@ namespace mySTL{
             delete head.next->prior;
             head.next->prior=&head;
         }
-        bool empty(){
+        bool empty()const{
             return head.next==&head;
         }
-        int size(){
+        int size()const{
             int len=0;
             ListNode* p=&head;
             do{
@@ -54,17 +70,28 @@ namespace mySTL{
             }while(p!=&head);
             return len;
         }
-        void print()const{
-            const ListNode* p=&head;
+        friend std::ostream& operator<<(std::ostream& out,const List&thelist){
+            const ListNode* p=&thelist.head;
             p=p->next;
-            while(p!=&head){
-                std::cout<<p->data<<' ';
+            while(p!=&thelist.head){
+                out<<p->data<<' ';
                 p=p->next;
             }
-            std::cout<<std::endl;
+            out<<std::endl;
+            return out;
         }
-        void insert_all(){
-            //
-        }
+        /* ListNode* insert_after(datatype x,ListNode* begin=&head){
+            
+        } */
     };
+    template<typename datatype>std::ostream& operator<<(std::ostream& out,const List<datatype>&thelist){
+            const auto p=&thelist.head;
+            p=p->next;
+            while(p!=&thelist.head){
+                out<<p->data<<' ';
+                p=p->next;
+            }
+            out<<std::endl;
+            return out;
+        }
 }

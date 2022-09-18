@@ -18,7 +18,6 @@ namespace mySTL{
             }
         }
     }
-    //functions below have been tested
     template<typename T>void select_sort(T* arr,int l,int r,bool cmp(const T&,const T&)){
         for(int i=l;i<r;++i){
             int SmallestPos=i;

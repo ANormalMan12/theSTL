@@ -1,4 +1,3 @@
-
 #pragma once
 
 namespace mySTL{
@@ -10,10 +9,10 @@ namespace mySTL{
         
         public:
         enum states{yes,no=-1};
-        array(int newsize):size(newsize),len(0){
+        Array(int newsize):len(newsize),len(0){
             arr=new dataType[size];
         }
-        ~array(){
+        ~Array(){
             delete[] arr;
         }
         states push(dataType data){
