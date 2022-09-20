@@ -8,6 +8,13 @@
  * @copyright Copyright (c) 2022
  * 
  */
+
+/**
+ * @brief below are trigers of testing modules
+ * 
+ */
+#define LOCAL
+
 #define LINEAR_TEST
 #define SORT_TEST
 #define TREE_TEST
@@ -26,6 +33,7 @@
 #ifdef GRAPH_TEST
 #include"Tree_Graph/_GraphTest.h"
 #endif
+
 int main(){
 #ifdef LOCAL
 freopen("in.txt","r",stdin);
@@ -34,5 +42,17 @@ freopen("out.txt","w",stdout);
     #ifdef LINEAR_TEST
     std::cout<<"Now you are testing Linear List"<<std::endl;
     test::testListPushPop();
+    #endif
+
+    #ifdef SORT_TEST
+    
+    #endif
+
+    #ifdef TREE_TEST
+    
+    #endif
+
+    #ifdef GRAPH_TEST
+    test::testMatrixGraphBasics();
     #endif
 }

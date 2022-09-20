@@ -70,6 +70,10 @@ namespace mySTL{
             }while(p!=&head);
             return len;
         }
+        
+        /* ListNode* insert_after(datatype x,ListNode* begin=&head){
+            
+        } */
         friend std::ostream& operator<<(std::ostream& out,const List&thelist){
             const ListNode* p=&thelist.head;
             p=p->next;
@@ -80,18 +84,5 @@ namespace mySTL{
             out<<std::endl;
             return out;
         }
-        /* ListNode* insert_after(datatype x,ListNode* begin=&head){
-            
-        } */
     };
-    template<typename datatype>std::ostream& operator<<(std::ostream& out,const List<datatype>&thelist){
-            const auto p=&thelist.head;
-            p=p->next;
-            while(p!=&thelist.head){
-                out<<p->data<<' ';
-                p=p->next;
-            }
-            out<<std::endl;
-            return out;
-        }
 }

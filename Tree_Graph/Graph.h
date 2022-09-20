@@ -1,19 +1,20 @@
 #pragma once
 #include<iostream>
+#include<cstring>
 namespace mySTL{
-    class graph_m{//vertices:0,1,2,3
+    class Graph_m{//vertices:0,1,2,3
         private:
-            bool mat**;
+            bool** mat;
             int n;
         public:
-        graph_m(int newn):n(newn){
+        Graph_m(int newn):n(newn){
             mat=new bool*[n-1];
             for(int i=0;i<n-1;++i){
                 mat[i]=new bool[n-1-i];
-                memset(mat[i],0,(n-1-i)*sizeof(mat[i][0]));
+                std::memset(mat[i],0,(n-1-i)*sizeof(mat[i][0]));
             }
         }
-        ~graph_m(){
+        ~Graph_m(){
             for(int i=0;i<n-1;++i){
                 delete[] mat[i];
             }
@@ -22,19 +23,25 @@ namespace mySTL{
         void join(int i,int j){
             if(i<j){
                 mat[i][j]=true;
-            }else{
+            }else if(i>j){
                 mat[j][i]=true;
+            }else{
+                std::cerr<<"i==j wrong in join";
             }
         }
         void cut(int i,int j){
             if(i<j){
                 mat[i][j]=false;
-            }else{
+            }else if(i>j){
                 mat[j][i]=false;
+            }else{
+                std::cerr<<"i==j wrong in cut";
             }
         } 
         bool isjoint(int i,int j){
-            if(i<j){
+            if(i==j){
+                return false;
+            }else if(i<j){
                 return mat[i][j];
             }else{
                 return mat[j][i];
@@ -52,7 +59,19 @@ namespace mySTL{
                     ++ret;
                 }
             }
-            return deg;
+            return ret;
         }
-    }
+        void print_matrix(std::ostream& out){
+            for(int i=0;i<n;++i){
+                for(int j=0;j<n;++j){
+                    if(isjoint(i,j)){
+                        out<<"1 ";
+                    }else{
+                        out<<"0 ";
+                    }
+                }
+                out<<"Degree of "<<i<<" is "<<deg(i)<<'\n';
+            }
+        }
+    };
 }

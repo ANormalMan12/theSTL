@@ -3,7 +3,6 @@
 #include"Array.h"
 #include<iostream>
 
-using LL=long long;
 namespace test{
     using namespace std;
     /**
