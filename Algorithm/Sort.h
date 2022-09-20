@@ -1,6 +1,5 @@
-
 #pragma once
-
+#include<memory>
 namespace mySTL{
     template<typename T>inline bool ascend(const T& x,const T&y){
         return x<y;
