@@ -18,7 +18,7 @@
 #define LINEAR_TEST
 #define SORT_TEST
 #define TREE_TEST
-#define GRAPH_TEST
+//#define GRAPH_TEST
 
 
 #ifdef LINEAR_TEST
@@ -36,12 +36,13 @@
 
 int main(){
 #ifdef LOCAL
-freopen("in.txt","r",stdin);
-freopen("out.txt","w",stdout);
+freopen("C:\\Users\\worke\\Documents\\GitHub\\mySTL\\in.txt","r",stdin);
+freopen("C:\\Users\\worke\\Documents\\GitHub\\mySTL\\out.txt","w",stdout);
 #endif
     #ifdef LINEAR_TEST
     std::cout<<"Now you are testing Linear List"<<std::endl;
     test::testListPushPop();
+    test::testListErase();
     #endif
 
     #ifdef SORT_TEST

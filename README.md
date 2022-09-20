@@ -1,4 +1,4 @@
-# mySTL
+# theSTL
 
 ## Introduction
 

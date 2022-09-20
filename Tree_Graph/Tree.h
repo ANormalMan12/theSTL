@@ -1,6 +1,6 @@
 #include<forward_list>
 
-namespace mySTL{
+namespace theSTL{
     template<typename datatype> class Tree{
         private:
             datatype val;

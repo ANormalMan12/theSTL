@@ -1,7 +1,7 @@
 
 #pragma once
 
-namespace mySTL{
+namespace theSTL{
     template<typename dataType> class Deque{
         private:
             

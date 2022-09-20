@@ -1,7 +1,7 @@
 #pragma once
 #include<iostream>
 #include<cstring>
-namespace mySTL{
+namespace theSTL{
     class Graph_m{//vertices:0,1,2,3
         private:
             bool** mat;
@@ -11,7 +11,9 @@ namespace mySTL{
             mat=new bool*[n-1];
             for(int i=0;i<n-1;++i){
                 mat[i]=new bool[n-1-i];
-                std::memset(mat[i],0,(n-1-i)*sizeof(mat[i][0]));
+                for(int j=0;j<n-1-i;++j){
+                    mat[i][j]=false;
+                }
             }
         }
         ~Graph_m(){

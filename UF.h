@@ -1,6 +1,6 @@
 
 using namespace std;
-namespace mySTL{
+namespace theSTL{
     class UF{//real size is bigger
         private:
         int size;

@@ -5,7 +5,7 @@ namespace test{
     using namespace std;
     void testMatrixGraphBasics(){
         cout<<"Create a Graph with 6 vertices"<<endl;
-        mySTL::Graph_m mGraph{6};
+        theSTL::Graph_m mGraph{6};
         cout<<"out put the matrix now\n";
         mGraph.print_matrix(cout);
         cout<<"join these vertices:"<<endl;

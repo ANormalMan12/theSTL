@@ -2,7 +2,7 @@
 #include<iostream>
 #pragma once
 using namespace std;
-namespace mySTL{
+namespace theSTL{
     enum fileState{notFound,pass,wrong};
     fileState fileSame(const string& fileX,const string& fileY){
         ifstream xin(fileX);

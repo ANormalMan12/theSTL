@@ -1,6 +1,6 @@
 #pragma once
 
-namespace mySTL{
+namespace theSTL{
     template<typename dataType> class Array{
         private:
         dataType* arr;

@@ -11,7 +11,7 @@ namespace test{
      * 
      */
     void testListPushPop(){
-        mySTL::List<int> myList;
+        theSTL::List<int> myList;
         cout<<"Push back {5,...,10}"<<endl;
         for(int i=5;i<=10;++i){
             myList.push_back(i);
@@ -33,4 +33,32 @@ namespace test{
         }
         cout<<myList;
     }
+    void testListErase(){
+        theSTL::List<int> myList;
+        for(int i=7;i<=16;++i){
+            myList.push_back(i);
+        }
+        for(int i=9;i<=14;++i){
+            myList.push_back(i);
+        }
+        cout<<"Now the list contains:\n";
+        cout<<myList;
+        cout<<"Now erase 10\n";
+        myList.erase(10);
+        cout<<myList;
+        cout<<"Now erase 10 again\n";
+        myList.erase(10);
+        cout<<myList;
+        cout<<"Try erase after pointer\n";
+        cout<<"Now erase 13, and save pointer\n";
+        auto temp=myList.erase(13);
+        cout<<myList;
+        cout<<"Now push front 13\n";
+        myList.push_front(13);
+        cout<<myList;
+        cout<<"Now erase 13\n";
+        myList.erase(13,temp);
+        cout<<myList;
+    }
+
 }
