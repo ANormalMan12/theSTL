@@ -1,4 +1,6 @@
 Now you are testing Linear List
+
+Now test List's push and pop
 Push back {5,...,10}
 5 6 7 8 9 10 
 Push front {4,3,2,1,0}
@@ -7,13 +9,16 @@ Pop front 7 integers
 7 8 9 10 
 Pop back 4 integers
 7 
+
+Now test erase
 Now the list contains:
 7 8 9 10 11 12 13 14 15 16 9 10 11 12 13 14 
 Now erase 10
 7 8 9 11 12 13 14 15 16 9 10 11 12 13 14 
 Now erase 10 again
 7 8 9 11 12 13 14 15 16 9 11 12 13 14 
-Try erase after pointer
+
+Try to erase after pointer
 Now erase 13, and save pointer
 7 8 9 11 12 14 15 16 9 11 12 13 14 
 Now push front 13

@@ -11,9 +11,13 @@
 #include<iostream>
 
 namespace theSTL{
-    template<typename datatype> struct ListNode{
-        ListNode* prior;
-        ListNode* next;
+    template<typename datatype> struct doubleLinkedNode{
+        doubleLinkedNode* prior;
+        doubleLinkedNode* next;
+        datatype data;
+    };
+    template<typename datatype> struct forwardLinkedNode{
+        forwardLinkedNode* next;
         datatype data;
     };
     /**
@@ -25,7 +29,7 @@ namespace theSTL{
         private:
             ListNode<datatype> head;
         public:
-        using ListNode=ListNode<datatype>;
+        using ListNode=doubleLinkedNode<datatype>;
         List(){
             head.prior=&head;
             head.next=&head;
