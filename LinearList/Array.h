@@ -1,3 +1,13 @@
+/**
+ * @file Array.h
+ * @author Weiye Wang (wangweiye1205@outlook.com)
+ * @brief The file contains the definition of template class Array
+ * @version 0.1
+ * @date 2022-09-21
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #pragma once
 
 namespace theSTL{
@@ -9,13 +19,13 @@ namespace theSTL{
         
         public:
         enum states{yes,no=-1};
-        Array(int newsize):len(newsize),len(0){
+        Array(int newsize):size(newsize),len(0){
             arr=new dataType[size];
         }
         ~Array(){
             delete[] arr;
         }
-        states push(dataType data){
+        states push_back(dataType data){
             if(len>=size){
                 return no;
             }else{
