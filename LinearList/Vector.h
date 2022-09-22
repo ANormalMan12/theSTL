@@ -1,3 +1,15 @@
+/**
+ * @file Vector.h
+ * @author Weiye Wang (wangweiye1205@outlook.com)
+ * @brief 
+ * @version 0.1
+ * @date 2022-09-21
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
+
+#pragma once
 #include<iostream>
 #include<cstring>
 #include<cstdlib>
@@ -27,6 +39,12 @@ namespace theSTL{
                 _len=_capacity;
             }
         }
+        /**
+         * @brief insert data after pos
+         * 
+         * @param data what to be inserted
+         * @param pos identify where new data was put after
+         */
         void insert_after(const dataType& data,int pos){
             if(pos>=_len||_len>=_capacity){
                 throw{};
@@ -38,11 +56,16 @@ namespace theSTL{
                 ++len;
             }
         }
+        /**
+         * @brief erase the object at pos position
+         * 
+         * @param pos 
+         */
         void erase(int pos){
             if(pos<0||pos>=len){
                 throw{};
             }else{
-                int val=arr[pos];
+                datatype val=arr[pos];
                 for(int i=pos+1;i<len;++i){
                     arr[i-1]=arr[i];
                 }
