@@ -9,7 +9,7 @@
  * 
  */
 #include<iostream>
-
+#pragma once
 namespace theSTL{
     template<typename datatype> struct doubleLinkedNode{
         doubleLinkedNode* prior;
@@ -26,10 +26,10 @@ namespace theSTL{
      * @tparam datatype 
      */
     template<typename datatype> class List{
-        private:
-            ListNode<datatype> head;
-        public:
         using ListNode=doubleLinkedNode<datatype>;
+        private:
+            ListNode head;
+        public:      
         List(){
             head.prior=&head;
             head.next=&head;

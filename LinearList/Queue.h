@@ -13,35 +13,69 @@
 #include"List.h"
 
 namespace theSTL{
+    /**
+     * @brief A ring queue based on array,
+     * using real-datasize to initialize
+     * 
+     * @attention _capacity means the real size of array
+     * @tparam datatype 
+     */
     template<typename datatype> class Queue_ring{
         private:
-            int rear,front;
-            int size;
+            int _rear,_front;
+            int _capacity;
             datatype* arr;
         public:
-            Queue_ring(int);
-            ~Queue_ring();
-            void enqueue(datatype);
-            void dequeue();
-            datatype getfront();
-            void clear();
-            bool empty();
-            int len();
-            int capacity();
+            Queue_ring(int capacity):_capacity(capacity+1),_rear(0),_front(0){
+                arr=new datatype[_capacity];
+            }
+            ~Queue_ring(){
+                delete[] arr;
+            }
+            void enqueue(datatype x){
+                int nextpos=(_rear+1)%_capacity;
+                if(nextpos==_front){
+                    throw "Full queue";
+                }else{
+                    _rear=nextpos;
+                    arr[_rear]=x;
+                }
+            }
+            void dequeue(){
+                if(_rear==_front){
+                    throw"Empty";
+                }else{
+                    _front=(_front+1)%_capacity;
+                }
+            }
+            datatype front(){
+                return arr[front];
+            }
+            void clear(){
+                _rear=_front=0;
+            }
+            bool empty(){
+                return _rear==_front;
+            }
+            int dataCapacity(){
+                return _capacity-1;
+            }
     };
     template<typename datatype> class Queue_link{
+        typedef forwardLinkedNode<datatype> Node;
         private:
-            forwardLinkedNode rear;
-            forwardLinkedNode* front;
+            Node head;
+            Node* rear,front;
         public:
-            Queue_link();
+            Queue_link(){
+                head
+            }
             ~Queue_link();
             void enqueue(datatype);
             void dequeue();
             datatype getfront();
             void clear();
             bool empty();
-            int len();
             int capacity();
     };
 }

@@ -27,7 +27,7 @@ namespace theSTL{
         int len(){return _len;}
         int size(){return _size;}
         states push_back(dataType data){
-            if(_len>=__size){
+            if(_len>=_size){
                 return no;
             }else{
                 arr[_len++]=data;

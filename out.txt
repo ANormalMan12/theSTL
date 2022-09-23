@@ -25,3 +25,61 @@ Now push front 13
 13 7 8 9 11 12 14 15 16 9 11 12 13 14 
 Now erase 13
 13 7 8 9 11 12 14 15 16 9 11 12 14 
+
+Test Linked Stack
+plan to push 0
+plan to push 1
+plan to push 2
+plan to push 3
+plan to push 4
+plan to push 5
+plan to push 6
+plan to push 7
+plan to push 8
+plan to push 9
+isEmpty: 0
+Now pop 9
+Now pop 8
+Now pop 7
+Now pop 6
+Now pop 5
+Now pop 4
+Now pop 3
+Now pop 2
+Now pop 1
+isEmpty: 0
+plan to push 0
+plan to push 1
+plan to push 2
+isEmpty: 0
+Now pop 2
+Now pop 1
+Now pop 0
+Now pop 0
+isEmpty: 1
+
+Test Array Stack with size 8
+plan to push 0
+plan to push 1
+plan to push 2
+plan to push 3
+plan to push 4
+plan to push 5
+plan to push 6
+plan to push 7
+plan to push 8
+Full Stack
+plan to push 9
+Full Stack
+isEmpty: 0
+Now pop 7
+Now pop 6
+Now pop 5
+Now pop 4
+Now pop 3
+Now pop 2
+Now pop 1
+Now pop 0
+Now pop Top from empty stack!
+Now pop Top from empty stack!
+isEmpty: 1

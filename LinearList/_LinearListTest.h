@@ -1,6 +1,7 @@
 #include"List.h"
 #include"Deque.h"
 #include"Array.h"
+#include"Stack.h"
 #include<iostream>
 
 namespace test{
@@ -62,6 +63,62 @@ namespace test{
         cout<<"Now erase 13\n";
         myList.erase(13,temp);
         cout<<myList;
+    }
+
+    void testStack(){
+        cout<<"\nTest Linked Stack\n";
+        theSTL::Stack_Linked<int> stk;
+        for(int i=0;i<10;++i){
+            cout<<"plan to push "<<i<<endl;
+            stk.push(i);
+        }
+        cout<<"isEmpty: "<<stk.empty()<<endl;
+        for(int i=0;i<9;++i){
+            try{
+                cout<<"Now pop "<<stk.top()<<endl;
+                stk.pop();
+            }catch(theSTL::Stack_exception error){
+                std::cout<<error.message<<std::endl;
+            }
+        }
+        cout<<"isEmpty: "<<stk.empty()<<endl;
+        for(int i=0;i<3;++i){
+            cout<<"plan to push "<<i<<endl;
+            stk.push(i);
+        }
+        cout<<"isEmpty: "<<stk.empty()<<endl;
+        for(int i=0;i<4;++i){
+            try{
+                cout<<"Now pop "<<stk.top()<<endl;
+                stk.pop();
+            }catch(theSTL::Stack_exception error){
+                std::cout<<error.message<<std::endl;
+            }
+        }
+        cout<<"isEmpty: "<<stk.empty()<<endl;
+
+//Then carry out Array Stack
+
+        cout<<"\nTest Array Stack with size 8\n";
+        theSTL::Stack_Array<int> Astk{8};
+        for(int i=0;i<10;++i){
+            try{
+                cout<<"plan to push "<<i<<endl;
+                Astk.push(i);
+            }catch(theSTL::Stack_exception error){
+                std::cout<<error.message<<std::endl;
+            }
+        }
+        cout<<"isEmpty: "<<Astk.empty()<<endl;
+        for(int i=0;i<10;++i){
+            try{
+                cout<<"Now pop "<<Astk.top()<<endl;
+                Astk.pop();
+            }catch(theSTL::Stack_exception error){
+                std::cout<<error.message<<std::endl;
+            }
+        }
+        cout<<"isEmpty: "<<Astk.empty()<<endl;
     }
 
 }

@@ -43,6 +43,9 @@ freopen("C:\\Users\\worke\\Documents\\GitHub\\mySTL\\out.txt","w",stdout);
     std::cout<<"Now you are testing Linear List"<<std::endl;
     test::testListPushPop();
     test::testListErase();
+    
+    test::testStack();
+    
     #endif
 
     #ifdef SORT_TEST
