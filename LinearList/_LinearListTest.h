@@ -2,6 +2,7 @@
 #include"Deque.h"
 #include"Array.h"
 #include"Stack.h"
+#include"Queue.h"
 #include<iostream>
 
 namespace test{
@@ -120,5 +121,7 @@ namespace test{
         }
         cout<<"isEmpty: "<<Astk.empty()<<endl;
     }
-
+    void testQueue(){
+        
+    }
 }
