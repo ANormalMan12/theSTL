@@ -33,8 +33,8 @@ namespace theSTL{
             _str=new char[_size+1];
             std::strcpy(_str,s);
             return *this;
-        }
-        String& operator=(const String& anoS){
+        } 
+        /* String& operator=(const String& anoS){
             if(_str!=nullptr){
                 delete[] _str;
             }
@@ -42,7 +42,7 @@ namespace theSTL{
             _str=new char[_size+1];
             std::strcpy(_str,anoS._str);
             return *this;
-        }
+        } */
         String& operator=(String&& anoS){
             if(_str!=nullptr){
                 delete[] _str;
@@ -58,6 +58,35 @@ namespace theSTL{
                 delete[] _str;
             }
         }
-        int size(){return _size;}
+        bool operator==(const String& anoS)const{
+            if(anoS._size==_size){
+                for(int i=0;i<_size;++i){
+                    if(anoS._str[i]!=_str[i]){
+                        return false;//conflict
+                    }
+                }
+                return true;//if they are the same
+            }else{
+                return false;//conflict
+            }
+        }
+        int size()const{return _size;}
+        /**
+         * @brief The function aims to return references of String
+         * but there are problems when comparison happens
+         * 
+         * @param pos 
+         * @return char& 
+         */
+        char& operator[](int pos){
+            return _str[pos];
+        }
+        char& at(int pos){
+            if(pos>=0&&pos<_size){
+                return _str[pos];
+            }else{
+                throw "RANGE ERROR";
+            }
+        }
     };
 }

@@ -7,6 +7,27 @@ namespace theSTL{
     template<typename T>inline bool descend(const T& x,const T&y){
         return x>y;
     }
+    template<typename T>void shell_sort(T*arr,int l,int r,bool cmp(const T&,const T&)){
+        int h=1;
+        while(h<(r-l+1)/3){
+            h=3*h+1;//get array of steps
+        }
+        while(h>=1){
+            
+        }
+    }
+    template<typename T>void bubble_sort(T*arr,int l,int r,bool cmp(const T&,const T&)){
+        T buf;
+        for(int i=l;i<r;++i){
+            for(int k=i;k<r;++k){
+                if(cmp(arr[k],arr[k+1])){
+                    buf=arr[k];
+                    arr[k]=arr[k+1];
+                    arr[k+1]=buf;
+                }
+            }
+        }
+    }
     template<typename T>void insert_sort(T* arr,int l,int r,bool cmp(const T&,const T&)){
         T tembuf;
         for(int tr=l+1;tr<=r;++tr){//make [l,tr] with order

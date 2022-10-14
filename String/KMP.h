@@ -11,7 +11,7 @@
 
 #pragma once
 #include"String.h"
-#include<iostream>
+#include<cstdio>
 namespace theSTL{
     class Pattern{
         private:
@@ -44,10 +44,10 @@ namespace theSTL{
             }
             putchar('\n');
         }
-        int find_nextsub(const std::string& primary,int begin_pos){
+        int find_nextsub(const String& primary,int begin_pos){
             int j=0;
             while(begin_pos<primary.size()&&j<len){
-                if(j==-1||primary[begin_pos]==subS[j]){
+                if(j==-1||primary._str[begin_pos]==subS[j]){
                     ++begin_pos;++j;//move forward
                 }else{
                     j=fail[j];//move left
