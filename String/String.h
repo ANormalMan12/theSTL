@@ -11,10 +11,12 @@
 
 #pragma once
 #include<cstring>
-class Pattern;//Extern define so that friend can be claimed
+class PatternKMP;//Extern define so that friend can be claimed
+class PatternBM;
 namespace theSTL{
     class String{
-        friend class Pattern;
+        friend class PatternKMP;
+        friend class PatternBM;
         private:
         char* _str;
         int _size;

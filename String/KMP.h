@@ -13,13 +13,13 @@
 #include"String.h"
 #include<cstdio>
 namespace theSTL{
-    class Pattern{
+    class PatternKMP{
         private:
         char* subS;
         int* fail;
         int len;
         public:
-        Pattern(const String& s):len(s._size){
+        PatternKMP(const String& s):len(s._size){
             subS=new char[len+1];
             fail=new int[len+1];
             strcpy(subS,s._str);
@@ -34,7 +34,7 @@ namespace theSTL{
                 }
             }
         }
-        ~Pattern(){
+        ~PatternKMP(){
             delete[] subS;
             delete[] fail;
         }

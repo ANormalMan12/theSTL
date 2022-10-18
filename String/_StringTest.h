@@ -32,6 +32,14 @@ namespace test{
         theSTL::String str3{"return"};
         theSTL::Pattern pat3{str3};
         pat3.print_next();
-        
+    }
+    void testBM(){
+        theSTL::String strs[]={"asfdfcasfffdd"
+                      ,"sasssfasdfsdf"
+                      ,"utotttttoooti"};
+        theSTL::PatternBM pat{};
+        printf("Pattern is %s\n")
+        cout<<pat.match(A)<<endl;
+        pat.printBMarr();
     }
 }

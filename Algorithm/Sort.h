@@ -85,21 +85,21 @@ namespace theSTL{
     }
     template<typename T>void quick_sort(T* arr,int l,int r,bool cmp(const T&,const T&)){
         if(l<r){
-            T wall=arr[l];//empty hole was at l
+            T pivot=arr[l];//identify the pivot
             int i=l,j=r;
-            while(i<j){
-                while(i<j&&cmp(wall,arr[j])){//wall<arr[j]
+            while(i<j){//put object in the right sides
+                while(i<j&&cmp(pivot,arr[j])){//pivot<arr[j]
                     --j;
                 }if(i<j){
                     arr[i++]=arr[j];//now the hole transfered to j
                 }
-                while(i<j&&cmp(arr[i],wall)){//arr[i]<wall
+                while(i<j&&cmp(arr[i],pivot)){//arr[i]<pivot
                     ++i;
                 }if(i<j){
                     arr[j--]=arr[i];//now the hole transfered to i
                 }
             }
-            arr[i]=wall;//now i==j,so there is no problem
+            arr[i]=pivot;//now i==j,so there is no problem
             quick_sort(arr,l,i-1,cmp);
             quick_sort(arr,i+1,r,cmp);
         }
