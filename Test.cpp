@@ -13,13 +13,18 @@
  * @brief below are trigers of testing modules
  * 
  */
+//----Input/Output control----------------------------------------
+
 #define LOCAL
+#define TERMIOUT
+
+//----Function control-------------------------------------------
 
 //#define LINEAR_TEST
 //#define SORT_TEST
-//#define TREE_TEST
+#define TREE_TEST
 //#define GRAPH_TEST
-#define STRING_TEST
+//#define STRING_TEST
 
 #ifdef LINEAR_TEST
 #include"LinearList/_LinearListTest.h"
@@ -40,7 +45,9 @@
 int main(){
 #ifdef LOCAL
 freopen("C:\\Users\\worke\\Documents\\GitHub\\mySTL\\in.txt","r",stdin);
+#ifndef TERMIOUT
 freopen("C:\\Users\\worke\\Documents\\GitHub\\mySTL\\out.txt","w",stdout);
+#endif
 #endif
 //--------test linear lists-------------------------------------
     #ifdef LINEAR_TEST
@@ -56,7 +63,8 @@ freopen("C:\\Users\\worke\\Documents\\GitHub\\mySTL\\out.txt","w",stdout);
     #endif
 //--------test tree algorithm--------------------------------
     #ifdef TREE_TEST
-    
+    //test::testBStree();
+    test::testRBtree();
     #endif
 //--------test graph algorithm-------------------------------
     #ifdef GRAPH_TEST
@@ -65,5 +73,6 @@ freopen("C:\\Users\\worke\\Documents\\GitHub\\mySTL\\out.txt","w",stdout);
 //--------test string algorithm-------------------------------
     #ifdef STRING_TEST
     test::testKMP();
+    test::testBM();
     #endif
 }

@@ -1,7 +1,7 @@
-#include"../LinearList/List.h"
-
+#pragma once
+#include "TreeBase.h"
 namespace theSTL{
-    template<typename dataType> class BSTree{
+    template<typename dataType> class BSTree: public BTreeBase<dataType>{
         struct Node{
             dataType data;
             Node* lTree;
@@ -14,49 +14,13 @@ namespace theSTL{
             if(pos->rTree!=nullptr){del_node(pos->rTree);}
             delete pos;
         }
-
-        dataType* search_node(Node* pos,dataType x){
-            
-        }
-        bool erase_node(Node* pos,dataType x){
-            while(true){
-                if(pos==nullptr){
-                    return false;
-                }else if(pos->data==x){
-                    //how to erase it properly
-                    if(pos->lTree==nullptr){
-                        if(pos->rTree==nullptr){
-                            
-                        }else{
-                            
-                        }
-                    }else{
-                        if(pos->rTree==nullptr){
-                            
-                        }else{
-                            
-                        }
-                    }
-                    return true;
-                }else{
-                    if(x < pos->data){pos=pos->lTree;}
-                    else if(x > pos->data){pos=pos->rTree;}
-                }
-            }
-        } 
         public:
         BSTree():root(nullptr){}
         ~BSTree(){if(root!=nullptr)del_node(root);}
-        void insert(dataType data){
-            while(pos!=nullptr){
-                if(data < pos->data){pos=pos->lTree;}
-                else if(data>= pos->data){pos=pos->rTree;}
-            }
-            pos=new Node;
-            pos->data=data;
-            pos->lTree=pos->rTree=nullptr;
+        void insert(const dataType& data){
+            
         }
-        dataType* search(dataType dat){
+        dataType* find(const dataType& dat){
             Node* pos=root;
             while(true){
                 if(pos==nullptr){
@@ -69,5 +33,6 @@ namespace theSTL{
                 }
             }
         }
+        bool erase(const dataType& x){}
     };
 }
