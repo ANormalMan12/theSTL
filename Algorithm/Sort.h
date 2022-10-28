@@ -7,48 +7,54 @@ namespace theSTL{
     template<typename T>inline bool descend(const T& x,const T&y){
         return x>y;
     }
-    template<typename T>void shell_sort(T*arr,int l,int r,bool cmp(const T&,const T&)){
-        int h=1;
-        while(h<(r-l+1)/3){
-            h=3*h+1;//get array of steps
-        }
-        while(h>=1){
-            
+    template<typename T>inline void swap(T&x,T&y){T buf=x;x=y;y=buf;}
+    const int shellExample[4]={4,3,2,1};
+    const int shellExampleLen=4;
+    template<typename T>void shell_sort(T*arr,int l,int r,bool cmp(const T&,const T&),const int*d,const int dlen){
+        for(int dpos=0;dpos<dlen;++dpos){
+            int h=d[dpos];
+            for(int i=h;i<=r;++i){
+                T tem=arr[i];
+                int npos=i-h;
+                for(;npos>=0&&cmp(tem,arr[npos]);npos-=h){
+                    arr[npos+h]=arr[npos];//tem<npos so that it should be inserted behind
+                }
+                arr[npos+h]=tem;
+            }
         }
     }
     template<typename T>void bubble_sort(T*arr,int l,int r,bool cmp(const T&,const T&)){
         T buf;
-        for(int i=l;i<r;++i){
-            for(int k=i;k<r;++k){
-                if(cmp(arr[k],arr[k+1])){
-                    buf=arr[k];
-                    arr[k]=arr[k+1];
-                    arr[k+1]=buf;
+        int lastSwap=l-1;
+        int top=r;
+        while(top>l){
+            lastSwap=l-1;
+            for(int i=l;i<top;++i){
+                if(cmp(arr[i+1],arr[i])){
+                    swap(arr[i],arr[i+1]);
+                    lastSwap=i;
                 }
             }
+            top=lastSwap;
         }
     }
     template<typename T>void insert_sort(T* arr,int l,int r,bool cmp(const T&,const T&)){
         T tembuf;
         for(int tr=l+1;tr<=r;++tr){//make [l,tr] with order
             for(int jpos=tr;jpos>0&&cmp(arr[jpos],arr[jpos-1]);--jpos){
-                tembuf=arr[jpos];
-                arr[jpos]=arr[jpos-1];
-                arr[jpos-1]=tembuf;
+                swap(arr[jpos],arr[jpos-1]);
             }
         }
     }
     template<typename T>void select_sort(T* arr,int l,int r,bool cmp(const T&,const T&)){
         for(int i=l;i<r;++i){
-            int SmallestPos=i;
+            int SmallestPos=i;//make sure i is equal or larger
             for(int j=i+1;j<=r;++j){
                 if(cmp(arr[j],arr[SmallestPos])){
                     SmallestPos=j;
                 }
             }
-            T tem=arr[i];
-            arr[i]=arr[SmallestPos];
-            arr[SmallestPos]=tem;
+            swap(arr[SmallestPos],arr[i]);
         }
     }
     template<typename T>void merge_sort(T* arr,int l,int r,bool cmp(const T&,const T&)){

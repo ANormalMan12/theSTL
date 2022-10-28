@@ -16,13 +16,13 @@
 //----Input/Output control----------------------------------------
 
 #define LOCAL
-#define TERMIOUT
+//#define TERMIOUT
 
 //----Function control-------------------------------------------
 
 //#define LINEAR_TEST
-//#define SORT_TEST
-#define TREE_TEST
+#define SORT_TEST
+//#define TREE_TEST
 //#define GRAPH_TEST
 //#define STRING_TEST
 
@@ -59,7 +59,7 @@ freopen("C:\\Users\\worke\\Documents\\GitHub\\mySTL\\out.txt","w",stdout);
     #endif
 //--------test sort algorithm---------------------------------------
     #ifdef SORT_TEST
-    
+    test::testSort();
     #endif
 //--------test tree algorithm--------------------------------
     #ifdef TREE_TEST
