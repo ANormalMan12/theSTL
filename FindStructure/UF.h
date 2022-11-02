@@ -1,14 +1,23 @@
 
 using namespace std;
 namespace theSTL{
-    class UF{//real size is bigger
-        private:
+    class UF_base{
+        protected:
         int size;
         int *arr;
-        int *weight;
         int num_sets;
         public:
-        UF(int Nsize):size(Nsize),num_sets(Nsize){//in fact,realsize=1+Nsize
+        virtual int find(int)=0;
+        virtual void connect(int,int)=0;
+        virtual bool isJoint(int,int)=0;
+        virtual int countSets()=0;
+    };
+
+    class UF_weight:public UF_base{//real size is bigger
+        private:
+        int *weight;
+        public:
+        UF_weight(int Nsize):size(Nsize),num_sets(Nsize){//in fact,realsize=1+Nsize
             arr=new int [size+1];//real size is bigger
             weight=new int [size+1];//tree root size
             for(int i=1;i<=size;++i){
@@ -16,7 +25,7 @@ namespace theSTL{
                 weight[i]=1;
             }
         }
-        ~UF(){
+        ~UF_weight(){
             if(arr!=nullptr){
                 delete[] arr;
             }
@@ -24,7 +33,7 @@ namespace theSTL{
                 delete[] weight;
             }
         }
-        int find(int i){
+        int find(int i){//o(h) h means height here
             int now=i;
             while(arr[now]!=now){//find root node
                 now=arr[now];
@@ -47,7 +56,7 @@ namespace theSTL{
                 }
             }
         }
-        bool isSame(int i,int j){
+        bool isJoint(int i,int j){
             return find(i)==find(j);
         }
         int countSets(){
@@ -55,33 +64,5 @@ namespace theSTL{
         }
     };
 
-    class onewayUF{
-        private:
-        int size;
-        int *arr;
-        int num_sets;
-        public:
-        onewayUF(int Nsize):size(Nsize),num_sets(Nsize){//in fact,realsize=1+Nsize
-            arr=new int [size+1];//real size is bigger
-        }
-        ~onewayUF(){
-            if(arr!=nullptr){
-                delete[] arr;
-            }
-        }
-        bool isroot(int index,int root){
-            while(arr[index]!=index){
-                if(root==arr[index]){
-                    return true;
-                }
-                index=arr[index];
-            }
-        }
-        void connect(int i,int j){
-            
-        }
-        int countSets(){
-            return num_sets;
-        }
-    };
+
 }

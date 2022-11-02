@@ -18,6 +18,7 @@ namespace theSTL{
         private:
         static const char RED='R';
         static const char BLA='B';
+        
         struct rbNode{
             dataType data;
             rbNode* parent;
@@ -25,13 +26,77 @@ namespace theSTL{
             rbNode* rchild;
             char color;
         };
+        
+        rbNode* nul;
         rbNode* root;
+        
         void del_node(rbNode* pos){
-            if(pos!=nullptr){
-                if(pos->lchild!=nullptr){del_node(pos->lchild);}
-                if(pos->rchild!=nullptr){del_node(pos->rchild);}
+            if(pos!=nul){
+                if(pos->lchild!=nul){del_node(pos->lchild);}
+                if(pos->rchild!=nul){del_node(pos->rchild);}
                 delete pos;
             }
+        }
+        void eraseFix(rbNode* x){
+            while(x!=root&&x->color==BLA){
+                if(x==x->parent->lchild){ //x is left child of its parent
+                    rbNode* w=x->parent->rchild; 
+                    //Case 1
+                    if(w->color==RED){
+                        w->color=BLA;
+                        x->parent->color=RED;
+                        left_rotate(x->parent);
+                        w=x->parent->rchild;
+                    }
+                    //Case 2
+                    if(w->lchild->color==BLA&&w->rchild->color==BLA){
+                        w->color=RED;
+                        x=x->parent; 
+                    }else{
+                        //Case 3：x's brother w is BLA,w's left child is red,rchild child is BLA
+                        if(w->rchild->color==BLA){
+                            w->color=RED;
+                            w->lchild->color=BLA;
+                            right_rotate(w);
+                            w=x->parent->rchild;
+                        }
+                        //Case 4：x's brother w is BLA,and w's rchild is red
+                        w->color=x->parent->color;
+                        x->parent->color=BLA;
+                        w->rchild->color=BLA; 
+                        left_rotate(x->parent);
+                        x=root;  
+                    }
+                }else{ //x is right child of its parent
+                    rbNode* w=x->parent->lchild;
+                    if(w->color==RED){  // case 1
+                        w->parent->color=RED;
+                        w->color=BLA;
+                        right_rotate(x->parent);
+                        w=x->parent->lchild;
+                    }
+                    else if(w->lchild->color==BLA&&w->rchild->color==BLA){   //case 2
+                        w->color=RED;
+                        x=x->parent;
+                    }
+                    else{
+                        if(w->lchild->color==BLA)    //case 3
+                        {
+                            w->rchild->color=BLA;
+                            w->color=RED;
+                            left_rotate(w);
+                            w=x->parent->lchild;
+                        }
+                        //case 4
+                        w->color=x->parent->color;
+                        x->parent->color=BLA;
+                        w->lchild->color=BLA;
+                        right_rotate(x->parent);
+                        x=root;
+                    }
+                }
+            }
+            x->color=BLA;//set x as black
         }
         void left_rotate(rbNode* pos){
             rbNode* ano=pos->rchild;
@@ -45,7 +110,7 @@ namespace theSTL{
                 ano->parent=pos->parent;
                 pos->parent=ano;
             }else{
-                ano->parent=nullptr;
+                ano->parent=nul;
                 pos->parent=ano;
                 root=ano;
             }
@@ -68,7 +133,7 @@ namespace theSTL{
                 ano->parent=pos->parent;
                 pos->parent=ano;
             }else{
-                ano->parent=nullptr;
+                ano->parent=nul;
                 pos->parent=ano;
                 root=ano;
             }
@@ -81,28 +146,28 @@ namespace theSTL{
         }
         
         void preOrderRecu(rbNode* pos){
-            if(pos!=nullptr){
+            if(pos!=nul){
                 std::cout<<pos->data<<pos->color<<' ';
                 preOrderRecu(pos->lchild);
                 preOrderRecu(pos->rchild);
             }
         }
         void inOrderRecu(rbNode* pos){
-            if(pos!=nullptr){
+            if(pos!=nul){
                 inOrderRecu(pos->lchild);
                 std::cout<<pos->data<<pos->color<<' ';
                 inOrderRecu(pos->rchild);
             }
         }
         void postOrderRecu(rbNode* pos){
-            if(pos!=nullptr){
+            if(pos!=nul){
                 postOrderRecu(pos->lchild);
                 postOrderRecu(pos->rchild);
                 std::cout<<pos->data<<pos->color<<' ';
             }
         }
         int heightRecu(rbNode* pos){
-            if(pos==nullptr){return 0;}
+            if(pos==nul){return 0;}
             else{
                 int hL=heightRecu(pos->lchild);
                 int hR=heightRecu(pos->rchild);
@@ -110,7 +175,7 @@ namespace theSTL{
             }
         }
         int redNumRecu(rbNode* pos){
-            if(pos!=nullptr){
+            if(pos!=nul){
                 int l=redNumRecu(pos->lchild);
                 int r=redNumRecu(pos->rchild);
                 return l+r+(pos->color==RED?1:0);
@@ -118,16 +183,28 @@ namespace theSTL{
                 return 0;
             }
         }
+        void transplant(rbNode* pos,rbNode* nPos){
+            if(pos->parent){
+                if(pos->parent->lchild==pos){
+                    pos->parent->lchild=nPos;
+                }else{
+                    pos->parent->rchild=nPos;
+                }
+            }else{
+                root=nPos;
+            }
+            nPos->parent=pos->parent;
+        }
         public:
-        rbTree():root(nullptr){}
+        rbTree(){nul=new rbNode;root=nul;}
         ~rbTree(){del_node(root);}
         void insert(const dataType& x){
         //------Normal binary search tree insert-----------------------
             rbNode* pos=root;
-            rbNode* bef=nullptr;
+            rbNode* bef=nul;
             bool isBeforeToLeft=false;
             //find insert position
-            while(pos!=nullptr){
+            while(pos!=nul){
                 if(x < pos->data){
                     bef=pos;
                     isBeforeToLeft=true;
@@ -142,10 +219,10 @@ namespace theSTL{
             //set data value
             pos=new rbNode;
             pos->data=x;
-            pos->lchild=pos->rchild=nullptr;
+            pos->lchild=pos->rchild=nul;
             pos->parent=bef;
             //adapt changes to tree
-            if(bef==nullptr){
+            if(bef==nul){
                 root=pos;
                 pos->color=BLA;
             }else{
@@ -158,14 +235,14 @@ namespace theSTL{
             }
         //-----Fix so that RB continues--------------------
             while(pos!=root&&pos->parent->color==RED){
-                //because root is Black so parent is not root here
+                //because root is BLA so parent is not root here
                 //so there must be a grandparent node
                 if(pos->parent==pos->parent->parent->lchild){
                     rbNode* parBro=pos->parent->parent->rchild;
-                    if(parBro==nullptr||parBro->color==BLA){
-                        //self:red,par:red,parBro:black
+                    if(parBro==nul||parBro->color==BLA){
+                        //self:red,par:red,parBro:BLA
                         //here we can conclude that
-                        //grand node is black
+                        //grand node is BLA
                         if(pos==pos->parent->rchild){
                             //problems haven't been solved here
                             //this turned problem into left one
@@ -185,10 +262,10 @@ namespace theSTL{
                 }else{
                     //parent is right node
                     rbNode* parBro=pos->parent->parent->lchild;
-                    if(parBro==nullptr||parBro->color==BLA){
-                        //self:red,par:red,parBro:black
+                    if(parBro==nul||parBro->color==BLA){
+                        //self:red,par:red,parBro:BLA
                         //here we can conclude that
-                        //grand node is black
+                        //grand node is BLA
                         if(pos==pos->parent->lchild){
                             //problems haven't been solved here
                             //this turned problem into left one
@@ -217,10 +294,78 @@ namespace theSTL{
         int redNum(){
             return redNumRecu(root);
         }
-        //Lab05 doesn't require find and erase operations
-        
-        bool erase(const dataType& x){return false;}
-        dataType* find(const dataType& x){return nullptr;}
+        rbNode* minNode(rbNode* pos){
+            if(pos->lchild==nul){
+                return pos;
+            }else{
+                return minNode(pos->lchild);
+            }
+        }
+        bool erase(const dataType& dat){
+            rbNode* pos=root;
+            while(pos!=nul){
+                if(pos->data==dat){
+                    break;
+                }else if(dat< pos->data){
+                    pos=pos->lchild;
+                }else{
+                    pos=pos->rchild;
+                }
+            }
+            if(pos==nul){
+                return false;//break point:not found
+            }
+            //begin to erase and fix
+            char oColor=pos->color;
+            rbNode* x=nul;
+            rbNode* y=pos;
+            if(pos->lchild==nul){
+                if(pos->rchild==nul){
+                    transplant(pos,nul);
+                }else{
+                    x=pos->rchild;
+                    transplant(pos,x);
+                }
+            }else{
+                if(pos->rchild==nul){
+                    x=pos->lchild;
+                    transplant(pos,pos->lchild);
+                }else{
+                    y=minNode(pos->rchild);
+                    oColor=y->color;
+                    x=y->rchild;
+                    if(y->parent==pos){
+                        x->parent=y;
+                    }else{
+                        transplant(y,y->rchild);
+                        y->rchild=pos->rchild;
+                        y->rchild->parent=y;
+                    }
+                    transplant(pos,y);
+                    y->lchild=pos->lchild;
+                    y->lchild->parent=y;
+                    y->color=pos->color;
+                }
+            }
+            if(oColor==BLA){
+                eraseFix(x);
+            }
+            delete pos;
+            return true;
+        }
+        rbNode* find(const dataType& x){
+            rbNode* pos=root;
+            while(pos!=nul){
+                if(pos->data==x){
+                    break;
+                }else if(x< pos->data){
+                    pos=pos->lchild;
+                }else{
+                    pos=pos->rchild;
+                }
+            }
+            return pos;
+        }
         //Lab05 doesn't require find and erase operations
         void printPreOrderTraverse(){
             preOrderRecu(root);

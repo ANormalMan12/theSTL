@@ -21,8 +21,8 @@
 //----Function control-------------------------------------------
 
 //#define LINEAR_TEST
-#define SORT_TEST
-//#define TREE_TEST
+//#define SORT_TEST
+#define TREE_TEST
 //#define GRAPH_TEST
 //#define STRING_TEST
 
