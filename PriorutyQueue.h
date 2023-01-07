@@ -21,7 +21,7 @@ namespace theSTL{
             arr[_size++]=
         }
         elemType& top(){
-
+            
         }
     };
 }

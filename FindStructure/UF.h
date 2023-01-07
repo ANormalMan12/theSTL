@@ -17,7 +17,9 @@ namespace theSTL{
         private:
         int *weight;
         public:
-        UF_weight(int Nsize):size(Nsize),num_sets(Nsize){//in fact,realsize=1+Nsize
+        UF_weight(int Nsize){//in fact,realsize=1+Nsize
+            size=Nsize;
+            num_sets=Nsize;
             arr=new int [size+1];//real size is bigger
             weight=new int [size+1];//tree root size
             for(int i=1;i<=size;++i){
